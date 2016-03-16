@@ -20,6 +20,7 @@ class ChosenField extends ListboxField
         $this->setDefaultText(_t('ChosenField.DEFAULT_TEXT', 'Please select'));
         $this->no_results_text = _t('ChosenField.NO_RESULTS',
             'Oops, nothing found!');
+        $this->disabledItems = self::config()->disabled_items;
     }
 
     public function Field($properties = array())
