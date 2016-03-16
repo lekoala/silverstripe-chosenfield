@@ -1,0 +1,6 @@
+---
+Name: chosenfield
+---
+ChosenField:
+  use_bootstrap: false
+  rtl: false

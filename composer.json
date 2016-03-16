@@ -1,0 +1,21 @@
+{
+    "name": "lekoala/silverstripe-chosenfield",
+    "description": "Chosen field Silverstripe",
+    "type": "silverstripe-module",
+    "keywords": ["silverstripe", "form", "chosen", "module"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LeKoala",
+            "email": "thomas@lekoala.be"
+        }
+    ],
+    "require":
+            {
+                "silverstripe/framework": "~3.1"
+            },
+    "extra": {
+        "installer-name": "chosenfield"
+    }
+
+}
