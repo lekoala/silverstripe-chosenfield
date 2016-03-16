@@ -1,0 +1,4 @@
+fr:
+  ChosenField:
+    NO_RESULTS: 'Oups, aucun résultat!'
+    DEFAULT_TEXT: 'Veuillez choisir'

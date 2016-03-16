@@ -1,0 +1,4 @@
+en:
+  ChosenField:
+    NO_RESULTS: 'Oops, nothing found!'
+    DEFAULT_TEXT: 'Please select'

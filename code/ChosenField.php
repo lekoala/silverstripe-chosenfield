@@ -16,6 +16,8 @@ class ChosenField extends ListboxField
                                 $value = '', $form = null, $emptyString = null)
     {
         parent::__construct($name, $title, $source, $value, $form, $emptyString);
+
+        $this->setDefaultText(_t('ChosenField.DEFAULT_TEXT', 'Please select'));
         $this->no_results_text = _t('ChosenField.NO_RESULTS',
             'Oops, nothing found!');
     }
