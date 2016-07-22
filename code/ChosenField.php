@@ -11,6 +11,7 @@ class ChosenField extends ListboxField
     protected $allow_single_deselect = true;
     protected $allow_max_selected;
     protected $use_order             = false;
+    protected $disable_search        = null;
 
     public function __construct($name, $title = null, $source = array(),
                                 $value = '', $form = null, $emptyString = null)
@@ -20,10 +21,10 @@ class ChosenField extends ListboxField
         $this->setDefaultText(_t('ChosenField.DEFAULT_TEXT', 'Please select'));
         $this->no_results_text = _t('ChosenField.NO_RESULTS',
             'Oops, nothing found!');
-        $this->disabledItems = self::config()->disabled_items;
+        $this->disabledItems   = self::config()->disabled_items;
     }
 
-    public function Field($properties = array())
+    public static function Requirements($order = false)
     {
         // Use updated version of Chosen
         Requirements::block(FRAMEWORK_ADMIN_DIR.'/thirdparty/chosen/chosen/chosen.css');
@@ -35,7 +36,15 @@ class ChosenField extends ListboxField
             Requirements::css(CHOSENFIELD_DIR.'/javascript/bootstrap-chosen/bootstrap-chosen.css');
         }
 
-        // Init
+        if ($order) {
+            Requirements::javascript(CHOSENFIELD_DIR.'/javascript/chosen-order/chosen.order.jquery.min.js');
+        }
+    }
+
+    public function Field($properties = array())
+    {
+        self::Requirements($this->use_order);
+
         $opts = array(
             'no_results_text' => $this->no_results_text,
             'allow_single_deselect' => $this->allow_single_deselect ? true : false
@@ -45,6 +54,9 @@ class ChosenField extends ListboxField
         }
         if ($this->allow_max_selected) {
             $opts['allow_max_selected'] = $this->allow_max_selected;
+        }
+        if ($this->disable_search !== null) {
+            $opts['disable_search'] = $this->disable_search;
         }
         if ($this->use_order) {
             $stringValue = $this->value;
@@ -56,6 +68,34 @@ class ChosenField extends ListboxField
         $this->setAttribute('data-chosen', json_encode($opts));
         Requirements::javascript(CHOSENFIELD_DIR.'/javascript/ChosenField.js');
         return parent::Field($properties);
+    }
+
+    public function getPlaceholder() {
+        return $this->getAttribute('data-placeholder');
+    }
+
+    public function setPlaceholder($placeholder) {
+        return $this->setAttribute('data-placeholder', $placeholder);
+    }
+
+    public function getDisableSearch()
+    {
+        return $this->disable_search;
+    }
+
+    public function setDisableSearch($disable_search)
+    {
+        $this->disable_search = $disable_search;
+    }
+
+    public function getUseOrder()
+    {
+        return $this->use_order;
+    }
+
+    public function setUseOrder($use_order)
+    {
+        $this->use_order = $use_order;
     }
 
     public function getNoResultsText()
