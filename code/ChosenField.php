@@ -7,37 +7,36 @@
  */
 class ChosenField extends ListboxField
 {
+
     protected $no_results_text;
     protected $allow_single_deselect = true;
     protected $allow_max_selected;
-    protected $use_order             = false;
-    protected $disable_search        = null;
+    protected $use_order = false;
+    protected $disable_search = null;
 
-    public function __construct($name, $title = null, $source = array(),
-                                $value = '', $form = null, $emptyString = null)
+    public function __construct($name, $title = null, $source = array(), $value = '', $form = null, $emptyString = null)
     {
         parent::__construct($name, $title, $source, $value, $form, $emptyString);
 
         $this->setDefaultText(_t('ChosenField.DEFAULT_TEXT', 'Please select'));
-        $this->no_results_text = _t('ChosenField.NO_RESULTS',
-            'Oops, nothing found!');
-        $this->disabledItems   = self::config()->disabled_items;
+        $this->no_results_text = _t('ChosenField.NO_RESULTS', 'Oops, nothing found!');
+        $this->disabledItems = self::config()->disabled_items;
     }
 
     public static function Requirements($order = false)
     {
         // Use updated version of Chosen
-        Requirements::block(FRAMEWORK_ADMIN_DIR.'/thirdparty/chosen/chosen/chosen.css');
-        Requirements::block(FRAMEWORK_ADMIN_DIR.'/thirdparty/chosen/chosen/chosen.jquery.js');
-        Requirements::css(CHOSENFIELD_DIR.'/javascript/chosen/chosen.min.css');
-        Requirements::javascript(CHOSENFIELD_DIR.'/javascript/chosen/chosen.jquery.js');
+        Requirements::block(FRAMEWORK_ADMIN_DIR . '/thirdparty/chosen/chosen/chosen.css');
+        Requirements::block(FRAMEWORK_ADMIN_DIR . '/thirdparty/chosen/chosen/chosen.jquery.js');
+        Requirements::css(CHOSENFIELD_DIR . '/javascript/chosen/chosen.min.css');
+        Requirements::javascript(CHOSENFIELD_DIR . '/javascript/chosen/chosen.jquery.js');
 
         if (self::config()->use_bootstrap) {
-            Requirements::css(CHOSENFIELD_DIR.'/javascript/bootstrap-chosen/bootstrap-chosen.css');
+            Requirements::css(CHOSENFIELD_DIR . '/javascript/bootstrap-chosen/bootstrap-chosen.css');
         }
 
         if ($order) {
-            Requirements::javascript(CHOSENFIELD_DIR.'/javascript/chosen-order/chosen.order.jquery.min.js');
+            Requirements::javascript(CHOSENFIELD_DIR . '/javascript/chosen-order/chosen.order.jquery.min.js');
         }
     }
 
@@ -66,15 +65,17 @@ class ChosenField extends ListboxField
             $this->setAttribute('data-chosen-order', $stringValue);
         }
         $this->setAttribute('data-chosen', json_encode($opts));
-        Requirements::javascript(CHOSENFIELD_DIR.'/javascript/ChosenField.js');
+        Requirements::javascript(CHOSENFIELD_DIR . '/javascript/ChosenField.js');
         return parent::Field($properties);
     }
 
-    public function getPlaceholder() {
+    public function getPlaceholder()
+    {
         return $this->getAttribute('data-placeholder');
     }
 
-    public function setPlaceholder($placeholder) {
+    public function setPlaceholder($placeholder)
+    {
         return $this->setAttribute('data-placeholder', $placeholder);
     }
 
