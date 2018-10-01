@@ -1,0 +1,4 @@
+fi:
+  ChosenField:
+    NO_RESULTS: 'Ei löytynyt'
+    DEFAULT_TEXT: 'Valitse'
